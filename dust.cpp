@@ -247,11 +247,11 @@ int main()
 			if (winCheck() == 1)
 			{
 				game = 0;
-				cout << "You win. " << endl;
+				cout << "Player 2 wins. " << endl;
 			}
 			else
 			{
-				cout << "Player 1's turn: ";
+				cout << "Player 1's turn: \n";
 
 				int x = 0;
 				int y = 0;
@@ -291,11 +291,11 @@ int main()
 			if (winCheck() == 1)
 			{
 				game = 0;
-				cout << "Player 2 wins. " << endl;
+				cout << "Player 1 wins. " << endl;
 			}
 			else
 			{
-				cout << "Player 2's turn: ";
+				cout << "Player 2's turn: \n";
 
 				int x = 0;
 				int y = 0;
