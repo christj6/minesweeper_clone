@@ -227,12 +227,6 @@ int main()
 	cout << "Please enter number of mines (up to 100): ";
 	cin >> workingMines;
 
-	if (workingMines == workingLength*workingLength)
-	{
-		game = 1;
-		cout << "Error? " << endl;
-	}
-
 	// initialize board
 	for (int i = 0; i < workingLength; i++)
 	{
@@ -244,46 +238,92 @@ int main()
 
 	generateMines();
 
+	int whoseTurn = 0; // 0 = player, 1 = AI, just add 1 to it after each turn and take mod 2 to figure out whose turn it is.
+
 	while (game == 1)
 	{
-		if (winCheck() == 1)
+		if (whoseTurn%2 == 0)
 		{
-			game = 0;
-			cout << "You win. " << endl;
-		}
-		else
-		{
-			int x = 0;
-			int y = 0;
-
-			cout << "Please enter x: ";
-			cin >> x;
-			cout << "Please enter y: ";
-			cin >> y;
-
-
-			if (mineHit(x, y) == 1)
+			if (winCheck() == 1)
 			{
 				game = 0;
-				cout << "Mine hit, you lose. " << endl;
+				cout << "You win. " << endl;
 			}
 			else
 			{
-				board[x][y] = search(x, y);
-				
-				// when a user hits a spot with 0 MINES
-				// the surrounding 0-spots will be revealed, like in normal minesweeper
-				if (board[x][y] == 0)
+				cout << "Player 1's turn: ";
+
+				int x = 0;
+				int y = 0;
+
+				cout << "Please enter x: ";
+				cin >> x;
+				cout << "Please enter y: ";
+				cin >> y;
+
+
+				if (mineHit(x, y) == 1)
 				{
-					exploreLeft(x, y);
-					exploreUp(x, y);
-					exploreRight(x, y);
-					exploreDown(x, y);
+					game = 0;
+					cout << "Mine hit, you lose. " << endl;
 				}
-				
+				else
+				{
+					board[x][y] = search(x, y);
+					
+					// when a user hits a spot with 0 MINES
+					// the surrounding 0-spots will be revealed, like in normal minesweeper
+					if (board[x][y] == 0)
+					{
+						exploreLeft(x, y);
+						exploreUp(x, y);
+						exploreRight(x, y);
+						exploreDown(x, y);
+					}
+					
+					printBoard();
+					whoseTurn++;
+				}
+			}
+		}
+		else if (whoseTurn%2 == 1)
+		{
+			if (winCheck() == 1)
+			{
+				game = 0;
+				cout << "Player 2 wins. " << endl;
+			}
+			else
+			{
+				cout << "Player 2's turn: ";
 
+				int x = 0;
+				int y = 0;
 
-				printBoard();
+				// Choose some good numbers for x and y
+
+				if (mineHit(x, y) == 1)
+				{
+					game = 0;
+					cout << "Mine hit, player 2 loses. " << endl;
+				}
+				else
+				{
+					board[x][y] = search(x, y);
+					
+					// when a user hits a spot with 0 MINES
+					// the surrounding 0-spots will be revealed, like in normal minesweeper
+					if (board[x][y] == 0)
+					{
+						exploreLeft(x, y);
+						exploreUp(x, y);
+						exploreRight(x, y);
+						exploreDown(x, y);
+					}
+					
+					printBoard();
+					whoseTurn++;
+				}
 			}
 		}
 
