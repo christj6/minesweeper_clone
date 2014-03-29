@@ -311,6 +311,76 @@ int main()
 				int y = 0;
 
 				// Choose some good numbers for x and y
+				for (int i = 0; i < workingLength; i++)
+				{
+					for (int j = 0; j < workingLength; j++)
+					{
+						int value = returnValue(i, j);
+
+						if (value == 0)
+						{
+							// pick spot adjacent to a zero first
+							if (returnValue(i-1, j) == -1)
+							{
+								x = i-1;
+								y = j;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i-1, j-1) == -1)
+							{
+								x = i-1;
+								y = j-1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i, j-1) == -1)
+							{
+								x = i;
+								y = j-1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i+1, j-1) == -1)
+							{
+								x = i+1;
+								y = j-1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i+1, j) == -1)
+							{
+								x = i+1;
+								y = j;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i+1, j+1) == -1)
+							{
+								x = i+1;
+								y = j+1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i, j+1) == -1)
+							{
+								x = i;
+								y = j+1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+							else if (returnValue(i-1, j+1) == -1)
+							{
+								x = i-1;
+								y = j+1;
+								i = workingLength + 1;
+								j = workingLength + 1;
+							}
+						}
+
+						// try something else
+					}
+				}
 
 				if (mineHit(x, y) == 1)
 				{
