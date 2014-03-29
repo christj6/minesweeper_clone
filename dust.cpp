@@ -4,7 +4,6 @@
 #include <stdlib.h> 
 #include <time.h>       /* time */
 
-#include "dust.h"
 
 #define MINES 100 // max number of mines
 #define LENGTH 10 // max length of board
@@ -13,6 +12,17 @@
 // ./dust.o
 
 using namespace std;
+
+int mineHit(int, int);
+int returnValue(int, int);
+int winCheck();
+int search(int, int);
+void exploreLeft(int, int);
+void exploreUp(int, int);
+void exploreRight(int, int);
+void exploreDown(int, int);
+void generateMines();
+void printBoard();
 
 //int MINES = 11;
 int game = 1;
