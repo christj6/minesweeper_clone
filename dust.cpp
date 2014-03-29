@@ -321,13 +321,19 @@ int main()
 							// Using information the human player doesn't have access to.
 							x = i;
 							y = j;
-							i = workingLength + 1;
+							i = workingLength + 1; // trip the loop when you find the first good spot, so you don't modify x and y.
 							j = workingLength + 1;
 						}
 					}
 				}
 
-				if (mineHit(x, y) == 1)
+				if (x == 0 && y == 0 && returnValue(x, y) != -1)
+				{
+					// the AI ran out of guaranteed safe spots to check
+					cout << "You cornered me, human. \n" << endl;
+				}
+
+				if (mineHit(x, y) == 1) // this would probably never happen?
 				{
 					game = 0;
 					cout << "Mine hit, player 2 loses. " << endl;
