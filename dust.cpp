@@ -315,70 +315,15 @@ int main()
 				{
 					for (int j = 0; j < workingLength; j++)
 					{
-						int value = returnValue(i, j);
-
-						if (value == 0)
+						if (mineHit(i, j) == 0 && returnValue(i, j) == -1)
 						{
-							// pick spot adjacent to a zero first
-							if (returnValue(i-1, j) == -1)
-							{
-								x = i-1;
-								y = j;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i-1, j-1) == -1)
-							{
-								x = i-1;
-								y = j-1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i, j-1) == -1)
-							{
-								x = i;
-								y = j-1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i+1, j-1) == -1)
-							{
-								x = i+1;
-								y = j-1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i+1, j) == -1)
-							{
-								x = i+1;
-								y = j;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i+1, j+1) == -1)
-							{
-								x = i+1;
-								y = j+1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i, j+1) == -1)
-							{
-								x = i;
-								y = j+1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
-							else if (returnValue(i-1, j+1) == -1)
-							{
-								x = i-1;
-								y = j+1;
-								i = workingLength + 1;
-								j = workingLength + 1;
-							}
+							// with this algorithm, the AI is definitely cheating.
+							// Using information the human player doesn't have access to.
+							x = i;
+							y = j;
+							i = workingLength + 1;
+							j = workingLength + 1;
 						}
-
-						// try something else
 					}
 				}
 
