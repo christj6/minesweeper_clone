@@ -150,6 +150,10 @@ void exploreLeft(int x, int y)
 		exploreUp(x-1, y);
 		exploreDown(x-1, y);
 	}
+	else if (search(x-1,y) != 0 && mineHit(x, y) != 1)
+	{
+		board[x-1][y] = search(x-1,y);
+	}
 }
 
 void exploreUp(int x, int y)
@@ -160,6 +164,10 @@ void exploreUp(int x, int y)
 		exploreUp(x, y-1);
 		exploreLeft(x, y-1);
 		exploreRight(x, y-1);
+	}
+	else if (search(x, y-1) != 0 && mineHit(x, y-1) != 1)
+	{
+		board[x][y-1] = search(x, y-1);
 	}
 }
 
@@ -172,6 +180,10 @@ void exploreRight(int x, int y)
 		exploreUp(x+1, y);
 		exploreDown(x+1, y);
 	}
+	else if (search(x+1, y) != 0 && mineHit(x+1, y) != 1)
+	{
+		board[x+1][y] = search(x+1, y);
+	}
 }
 
 void exploreDown(int x, int y)
@@ -182,6 +194,10 @@ void exploreDown(int x, int y)
 		exploreDown(x, y+1);
 		exploreLeft(x, y+1);
 		exploreRight(x, y+1);
+	}
+	else if (search(x, y+1) != 0 && mineHit(x, y+1) != 1)
+	{
+		board[x][y+1] = search(x, y+1);
 	}
 }
 
