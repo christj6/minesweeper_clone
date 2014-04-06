@@ -24,7 +24,6 @@ void exploreDown(int, int);
 void generateMines();
 void printBoard();
 
-//int MINES = 11;
 int game = 1;
 
 int workingLength = 4;
@@ -220,6 +219,26 @@ void printBoard()
 	}
 }
 
+int assessValue(int x, int y)
+{
+	// the lowest value will be the safest spot to mark, highest the most likely to have a mine
+	// algorithm to be implemented later
+	return 0;
+}
+
+void findSpot(int *x, int *y)
+{
+	for (int i = 0; i < workingLength; i++)
+	{
+		for (int j = 0; j < workingLength; j++)
+		{
+			// to be implemented later, using the assess value function
+			(*x) = i;
+			(*y) = j;
+		}
+	}
+}
+
 void generateMines()
 {
 	for (int i = 0; i < workingMines; i++)
@@ -227,6 +246,8 @@ void generateMines()
 		mineXcoord[i] = rand() % workingLength;
 		mineYcoord[i] = rand() % workingLength;
 
+		/*
+		// this block of code doesn't work the way I intended -- duplicate mines still appear
 		for (int j = 0; j < workingMines; j++)
 		{
 			if (i != j && mineXcoord[i] == mineXcoord[j] && mineYcoord[i] == mineYcoord[j]) // ensure there are no duplicate pairs of mine coordinates
@@ -235,11 +256,12 @@ void generateMines()
 				mineYcoord[i] = rand() % workingLength;
 			}
 		}    
+		*/
 
 		//mineXcoord[i] = -500; // used to eliminate MINES from playing field; makes it easier to debug recursive zero display functions
 		//mineYcoord[i] = -500;
 
-		//cout << "x: " << mineXcoord[i] << ", y: " << mineYcoord[i] << endl;
+		cout << "x: " << mineXcoord[i] << ", y: " << mineYcoord[i] << endl;
 	}
 }
 
@@ -327,6 +349,7 @@ int main()
 				int y = 0;
 
 				// Choose some good numbers for x and y
+				/*
 				for (int i = 0; i < workingLength; i++)
 				{
 					for (int j = 0; j < workingLength; j++)
@@ -348,6 +371,9 @@ int main()
 					// the AI ran out of guaranteed safe spots to check
 					cout << "You cornered me, human. \n" << endl;
 				}
+				*/
+
+				findSpot(&x, &y); // AI algorithm goes here
 
 				if (mineHit(x, y) == 1) // this would probably never happen?
 				{
