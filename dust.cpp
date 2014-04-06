@@ -21,6 +21,11 @@ void exploreLeft(int, int);
 void exploreUp(int, int);
 void exploreRight(int, int);
 void exploreDown(int, int);
+
+//void exploreNW(int, int);
+
+int assessValue(int, int);
+void findSpot(int &, int &);
 void generateMines();
 void printBoard();
 
@@ -155,6 +160,23 @@ void exploreLeft(int x, int y)
 	}
 }
 
+/*
+void exploreNW(int x, int y)
+{
+	if (search(x-1,y-1) == 0 && returnValue(x-1, y-1) == -1)
+	{
+		board[x-1][y-1] = 0;
+		exploreLeft(x-1, y-1);
+		exploreUp(x-1, y-1);
+		exploreDown(x-1, y-1);
+	}
+	else if (search(x-1,y-1) != 0 && mineHit(x, y) != 1)
+	{
+		board[x-1][y-1] = search(x-1,y-1);
+	}
+}
+*/
+
 void exploreUp(int x, int y)
 {
 	if (search(x, y-1) == 0 && returnValue(x, y-1) == -1)
@@ -228,13 +250,19 @@ int assessValue(int x, int y)
 
 void findSpot(int *x, int *y)
 {
+	int currentBest = 5000;
+
 	for (int i = 0; i < workingLength; i++)
 	{
 		for (int j = 0; j < workingLength; j++)
 		{
 			// to be implemented later, using the assess value function
-			(*x) = i;
-			(*y) = j;
+			if (assessValue(i, j) < currentBest)
+			{
+				currentBest = assessValue(i, j);
+				(*x) = i;
+				(*y) = j;
+			}
 		}
 	}
 }
@@ -392,6 +420,8 @@ int main()
 						exploreUp(x, y);
 						exploreRight(x, y);
 						exploreDown(x, y);
+
+						//exploreNW(x, y);
 					}
 					
 					printBoard();
