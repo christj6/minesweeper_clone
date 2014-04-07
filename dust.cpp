@@ -249,7 +249,7 @@ int assessValue(int x, int y)
 	if (returnValue(x, y) == -1)
 	{
 		cout << "x: " << x << " y: " << y << endl;
-		
+
 		// spot wasn't hit yet
 		for (int i = x-1; i <= x+1; i++)
 		{
@@ -259,6 +259,14 @@ int assessValue(int x, int y)
 				{
 					// search surrounding eight spots for mine #s
 					cout << "i: " << i << " j: " << j << endl;
+
+					// x: 1 y: 1
+					// i: 0 j: 0
+					// i: 0 j: 2
+					// i: 2 j: 0
+					// i: 2 j: 2
+					// eight spots should be listed there, not 4 -- to be fixed
+
 				}
 			}
 		}
