@@ -244,40 +244,37 @@ void printBoard()
 int assessValue(int x, int y)
 {
 	// the lowest value will be the safest spot to mark, highest the most likely to have a mine
-	// algorithm to be implemented later
 
-	if (returnValue(x, y) == -1)
+	int possibleSpots = 0; // not all spots on map are surrounded by 8 spots -- find the # of valid spots
+	int unmarked = 0; // # of unmarked spots surrounding the spot we're currently looking at:
+
+	for (int i = x-1; i <= x+1; i++)
 	{
-		cout << "x: " << x << " y: " << y << endl;
-
-		// spot wasn't hit yet
-		for (int i = x-1; i <= x+1; i++)
+		for (int j = y-1; j <= y+1; j++)
 		{
-			for (int j = y-1; j <= y+1; j++)
+			if (i != j && returnValue(i, j) != -10) // -10 used to mark invalid spots
 			{
-				if (i != x && j != y)
+				// search surrounding eight (or fewer) spots for mine #s
+				// if the spot being looked at is surrounded by n mines, and there are 8-n empty spots surrounding it, those spots must be mines.
+				// If the difference is bigger, any of those spots will be more reasonable.
+
+				possibleSpots++;
+				
+				if (returnValue(i, j) == -1)
 				{
-					// search surrounding eight spots for mine #s
-					cout << "i: " << i << " j: " << j << endl;
-
-					// x: 1 y: 1
-					// i: 0 j: 0
-					// i: 0 j: 2
-					// i: 2 j: 0
-					// i: 2 j: 2
-					// eight spots should be listed there, not 4 -- to be fixed
-
+					unmarked++;
 				}
+				
 			}
 		}
 	}
-	else
-	{
-		// spot was already hit -- we don't want to hit it again.
-		// I'm debating whether or not to even allow a player to "hit" the same spot twice.
-		// I'm pretty sure it's against the rules in actual minesweeper.
-		return 5000;
-	}
+	
+	// 
+	cout << "# of mines surrounding: " << returnValue(x, y) << endl;
+	cout << "empty spots: " << possibleSpots - unmarked << endl;
+	
+	
+	
 
 	return 0;
 }
