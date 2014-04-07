@@ -245,21 +245,49 @@ int assessValue(int x, int y)
 {
 	// the lowest value will be the safest spot to mark, highest the most likely to have a mine
 	// algorithm to be implemented later
+
+	if (returnValue(x, y) == -1)
+	{
+		cout << "x: " << x << " y: " << y << endl;
+		
+		// spot wasn't hit yet
+		for (int i = x-1; i <= x+1; i++)
+		{
+			for (int j = y-1; j <= y+1; j++)
+			{
+				if (i != x && j != y)
+				{
+					// search surrounding eight spots for mine #s
+					cout << "i: " << i << " j: " << j << endl;
+				}
+			}
+		}
+	}
+	else
+	{
+		// spot was already hit -- we don't want to hit it again.
+		// I'm debating whether or not to even allow a player to "hit" the same spot twice.
+		// I'm pretty sure it's against the rules in actual minesweeper.
+		return 5000;
+	}
+
 	return 0;
 }
 
 void findSpot(int *x, int *y)
 {
 	int currentBest = 5000;
+	int current = 5000;
 
 	for (int i = 0; i < workingLength; i++)
 	{
 		for (int j = 0; j < workingLength; j++)
 		{
-			// to be implemented later, using the assess value function
-			if (assessValue(i, j) < currentBest)
+			current = assessValue(i, j);
+
+			if (current < currentBest)
 			{
-				currentBest = assessValue(i, j);
+				currentBest = current;
 				(*x) = i;
 				(*y) = j;
 			}
