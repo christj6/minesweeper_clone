@@ -1,4 +1,4 @@
 minesweeper_prototype
 =====================
 
-minesweeper: prototyped in c++
+minesweeper: prototyped in c++.
