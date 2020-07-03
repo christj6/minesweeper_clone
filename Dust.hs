@@ -4,7 +4,7 @@ import System.IO.Unsafe
 import System.Random
 import Data.Maybe (listToMaybe)
 
--- have 2 humans play aaginst each other
+-- have 2 humans play against each other
 human = do
 	main 0
 
